@@ -1,0 +1,22 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion *ngIf="orders?.length>0 && !isLoading">
+  <mat-expansion-panel *ngFor='let order of orders'>
+    <mat-expansion-panel-header>
+      Order Id: {{order?._id}}
+    </mat-expansion-panel-header>
+    <mat-expansion-panel class="item-panel" *ngFor='let item of order.items'>
+        <mat-expansion-panel-header>
+          {{item?.title}}
+        </mat-expansion-panel-header>
+        <div class="prod-image">
+          <img [src]="item?.imagePath" [alt]="item?.title">
+        </div>
+        <p>{{item?.price}}</p>
+        <p>{{item?.description}}</p>
+        <br>
+        <p>Quantity: {{item?.quantity}}</p>
+    </mat-expansion-panel>
+  </mat-expansion-panel>
+
+</mat-accordion>
+<p class="no-products" *ngIf="orders?.length==0">No Orders Available</p>

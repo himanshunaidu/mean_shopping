@@ -1,0 +1,22 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion *ngIf="cart?.length>0 && !isLoading">
+  <!--index below is a property that is provided by ngFor-->
+  <mat-expansion-panel *ngFor='let c of cart'>
+    <mat-expansion-panel-header>
+      {{c?.title}}
+    </mat-expansion-panel-header>
+    <div class="prod-image">
+      <img [src]="c?.imagePath" [alt]="c?.title">
+    </div>
+    <p>{{c?.price}}</p>
+    <p>{{c?.description}}</p>
+    <br>
+    <p>Quantity: {{c?.quantity}}</p>
+    <mat-action-row>
+      <button mat-button color='warn' (click)="onRemove(c?._id)">REMOVE FROM CART</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <button mat-button color='primary' (click)="onOrder(cart)">ORDER</button>
+</mat-accordion>
+<p class="no-products" *ngIf="cart?.length==0">Empty Cart</p>

@@ -1,0 +1,19 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion *ngIf="products.length>0 && !isLoading">
+  <mat-expansion-panel *ngFor='let product of products'>
+    <mat-expansion-panel-header>
+      {{product?.title}}
+    </mat-expansion-panel-header>
+    <div class="prod-image">
+      <img [src]="product.imagePath" [alt]="product?.title">
+    </div>
+    <p>{{product?.price}}</p>
+    <p>{{product?.description}}</p>
+    <mat-action-row>
+      <a mat-button>DETAILS</a>
+      <button mat-button color='accent' *ngIf="userAuth"
+      (click)='onAddToCart(product?._id)'>ADD TO CART</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="no-products" *ngIf="products.length==0">No Products Available</p>
